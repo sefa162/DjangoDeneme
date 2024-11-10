@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="mt-4 p-5 bg-primary text-white rounded text-center">
+    <h1>Merhaba</h1>
+    <p>Nasıl Yardımcı Olabiliriz...</p>
+  </div>
+<p>
+
+  {% if request.user.is_authenticated %}
+    <p>Giriş Yapılmış</p>
+    <p>{{request.user.username}}</p>
+
+  {% else %}
+  <p>Giriş Yapılmamış</p>
+  {% endif %}
+
+
+</p>
+
+{% endblock %}

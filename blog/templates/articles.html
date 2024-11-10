@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+
+
+<div style="margin-left: auto; margin-right: auto; margin-top: 20px; max-width: 800px;">
+  <h3>Makaleler</h3>
+  <form>
+    {% csrf_token %}
+    <input type="text" name="keyword" class="input-sm"></input>
+    <button type="submit" class="btn btn-danger">Ara</button>
+  </form>
+  
+  <hr>
+
+  {% if articles %}
+    {% for article in articles %}
+      <!-- <a> etiketini tüm içeriği sarmak için yerleştiriyoruz -->
+      <a href="{% url 'article:detail' article.id %}" class="d-block mb-2">
+        <div class="p-5 mb-3 bg-secondary text-white">
+          <div class="row">
+            <div class="col">
+              {% if article.article_image %}
+                <figure class="mb-8">
+                  <img class="img-fluid rounded" src="{{ article.article_image.url }}" alt="..." />
+                </figure>
+              {% endif %}
+              <h4>{{ article.title }}</h4>
+              <p>{{ article.created_date }} by {{ article.author }}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-danger">
+      Makale Bulunumadı
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
